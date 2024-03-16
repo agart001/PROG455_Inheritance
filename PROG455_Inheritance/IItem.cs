@@ -13,12 +13,12 @@ namespace PROG455_Inheritance
         /// <summary>
         /// The item's name.
         /// </summary>
-        string Name { get; protected set; }
+        string Name { get;}
 
         /// <summary>
         /// The item's description.
         /// </summary>
-        string Desc { get; protected set; }
+        string Desc { get;}
 
         /// <summary>
         /// The item's unique guid Id.
@@ -26,59 +26,50 @@ namespace PROG455_Inheritance
         Guid ID { get; protected set; }
     }
 
-
-    public class Wood : IItem
+    public abstract class Item : IItem
     {
-        public string Name { get; set; }
-        public string Desc { get; set; }
-        public Guid ID { get; set; }
+        public virtual string Name { get; }
 
-        public Wood()
-        {
-            Name = "Wood";
-            Desc = "A small log.";
-            ID = Guid.NewGuid();
-        }
+        public virtual string Desc { get; }
+
+        public Guid ID { get; set; } = Guid.NewGuid();
     }
 
-    public class Ore : IItem
+
+    public class Wood : Item
     {
-        public string Name { get; set; }
-        public string Desc { get; set; }
-        public Guid ID { get; set; }
-        public Ore() 
-        {
-            Name = "Ore";
-            Desc = "A small lump of ore.";
-            ID = Guid.NewGuid();
-        }
+        public override string Name => "Wood";
+        public override string Desc => "A small log.";
     }
 
-    public class Meat : IItem
+    public class Coal : Item
     {
-        public string Name { get; set; }
-        public string Desc { get; set; }
-        public Guid ID { get; set; }
+        public override string Name => "Coal";
 
-        public Meat()
-        {
-            Name = "Meat";
-            Desc = "A small chunk of flesh.";
-            ID = Guid.NewGuid();
-        }
+        public override string Desc => "A lump of coal.";
     }
 
-    public class Stick : IItem
+    public class Ore : Item
     {
-        public string Name { get; set; }
-        public string Desc { get; set; }
-        public Guid ID { get; set; }
+        public override string Name => "Ore";
+        public override string Desc => "A small lump of ore.";
+    }
 
-        public Stick()
-        {
-            Name = "Stick";
-            Desc = "A small stick.";
-            ID = Guid.NewGuid();
-        }
+    public class Ingot : Item
+    {
+        public override string Name => "Ingot";
+        public override string Desc => "An ingot of metal.";
+    }
+
+    public class Meat : Item
+    {
+        public override string Name => "Meat";
+        public override string Desc => "A small chunk of flesh.";
+    }
+
+    public class Stick : Item
+    {
+        public override string Name => "Stick";
+        public override string Desc => "A small stick.";
     }
 }

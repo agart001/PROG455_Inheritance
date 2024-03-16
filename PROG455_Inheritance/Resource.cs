@@ -6,7 +6,15 @@ using System.Threading.Tasks;
 
 namespace PROG455_Inheritance
 {
-    public class Resource : IDestructable
+    public interface IDestructable
+    {
+        int Health { get; set; }
+        public Type Material { get; protected set; }
+
+        public void Visit(Tool tool);
+    }
+
+    public abstract class Resource : IDestructable
     {
         public enum MaterialType
         {
@@ -17,7 +25,7 @@ namespace PROG455_Inheritance
 
         public MaterialType Type { get; protected set; }
 
-        public IItem Material { get; protected set; }
+        public Type Material { get; set; }
 
         public int Health { get; set; }
 
@@ -56,7 +64,17 @@ namespace PROG455_Inheritance
 
                     break;
 
-                default: break;
+                default: Health -= tool.AttackValue / 2; break;
+            }
+        }
+
+        internal void ResourceMaterial()
+        {
+            switch(Type)
+            {
+                case MaterialType.Wood: Material = typeof(Wood); break;
+                case MaterialType.Stone: Material = typeof(Ore); break;
+                case MaterialType.Flesh: Material = typeof(Meat); break;
             }
         }
     }
@@ -67,6 +85,7 @@ namespace PROG455_Inheritance
         {
             Type = MaterialType.Wood;
             Health = 20;
+            ResourceMaterial();
         }
     }
 
@@ -76,6 +95,7 @@ namespace PROG455_Inheritance
         {
             Type = MaterialType.Stone;
             Health = 20;
+            ResourceMaterial();
         }
     }
 
@@ -85,6 +105,7 @@ namespace PROG455_Inheritance
         {
             Type = MaterialType.Flesh;
             Health = 20;
+            ResourceMaterial();
         }
     }
 }

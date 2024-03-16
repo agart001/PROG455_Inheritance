@@ -2,9 +2,21 @@
 {
     internal class Program
     {
+        static Game game;
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            UI.Print(new string[]
+            {
+                "------------------------------------",
+                "   Welcome to PROG455 Inheritance",
+                "------------------------------------"
+            });
+
+            UI.Print("Please enter a name: ");
+            var name = Console.ReadLine();
+
+            game = new Game(name);
+            game.Loop();
         }
     }
 }
